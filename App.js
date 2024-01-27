@@ -1,32 +1,52 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View, Image } from 'react-native';
+import { getImageUrl } from './utils.js';
 
-const PlaceholderImage = require('./assets/images/background-image.png');
-
-export default function App() {
+function Profile ({
+  imageId,
+  name,
+  profession,
+  formation,
+  interesting,
+  imageSize = 70
+}) {
   return (
-    <View style={styles.container}>
-      <View Style={styles.imageContainer}>
-        <Image source={PlaceholderImage} style={styles.image} />
-      </View>
-      <StatusBar style="auto" />
-    </View>
+      <section className="profile">
+        <h2>{name}</h2>
+        <img
+          className="avatar"
+          src={getImageUrl('imageId')}
+          alt={name}
+          width={imageSize}
+          height={imageSize}
+        />
+        <ul>
+            <li><b>Profession:</b> {profession}</li>
+            <li>
+            <b>Formation: {formation.length} </b>
+            ({formation.join(', ')})
+            </li>
+          <li>
+            <b>Interesting: </b>
+            {interesting}
+          </li>
+        </ul>
+    </section>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#25292e',
-    alignItems: 'center',
-  },
-  imageContainer: {
-    flex: 1,
-    paddingTop: 58,
-  },
-  image: {
-    width: 320,
-    height: 440,
-    borderRadius: 18,
-  },
-});
+export default function Gallery() {
+  return (
+    <div>
+      <h1>Self Introduction</h1>
+      <Profile
+        imageId="c4hun"
+        name="Sacha, c4hun"
+        profession="Cashier"
+        interesting="Angular, AWS Cloud and Linux OS"
+        formation={[
+          '2023-2024 Studi: GRADUATE DEVELOPPEUR WEB FULL STACK',
+          'EFC formation: Assistant Accountant',
+        ]}
+      />
+    </div>
+  );
+}
